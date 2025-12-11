@@ -91,17 +91,33 @@ def upload_image(request):
 # -----------------------------
 # Analysis result
 # -----------------------------
+# -----------------------------
+# Analysis result (form-data)
+# -----------------------------
 @api_view(['POST'])
 def analysis_result(request):
-    image_path = request.data.get("image_path")  # ara és path local
-    if not image_path or not os.path.exists(image_path):
-        return Response({"error": f"No se encontró la imagen: {image_path}"}, status=400)
-    
+    # Obtiene la imagen desde form-data
+    image_file = request.FILES.get("image")
+    if not image_file:
+        return Response({"error": "No se subió imagen"}, status=400)
+
+    # Guardar temporalmente la imagen
+    temp_path = f"/tmp/{image_file.name}"
+    with open(temp_path, "wb+") as f:
+        for chunk in image_file.chunks():
+            f.write(chunk)
+
+    # Hacer predicción
     try:
-        probabilidad, prediccion = predictor.predict(image_path)
+        probabilidad, prediccion = predictor.predict(temp_path)
     except Exception as e:
+        os.remove(temp_path)
         return Response({"error": str(e)}, status=500)
-    
+
+    # Eliminar archivo temporal
+    os.remove(temp_path)
+
+    # Devolver resultado
     return Response({
         "status": "ok",
         "resultado": prediccion,
