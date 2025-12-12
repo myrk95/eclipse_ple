@@ -1,4 +1,4 @@
-Django>=5.2.8,<6
+ Django>=5.2.8,<6
 djangorestframework
 django-cors-headers
 gunicorn
@@ -6,4 +6,4 @@ numpy
 Pillow
 python-dotenv
 psycopg2-binary
-tensorflow
+tensorflow-cpu==2.26.0
