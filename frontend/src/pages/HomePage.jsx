@@ -1,27 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import './HomePage.css'; // Ahora usa su propio CSS
-import { useFetch } from '../services/useFetch';
+import './HomePage.css'; 
 
 const HomePage = () => {
-const [history, setHistory] = useState();
-  const fetchData = useFetch(); // ✅ aquí llamas al hook
 
-  useEffect(() => {
-    const fetchHistory = async () => {
-      try {
-        const response = await fetchData('http://127.0.0.1:8000/api/v1/history');
-        setHistory(response);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchHistory();
-  }, [fetchData]); 
-  console.log(history);
-  
   return (
     <div className="home-page">
       <Navbar />
@@ -111,5 +94,4 @@ const [history, setHistory] = useState();
     </div>
   );
 };
-
 export default HomePage;

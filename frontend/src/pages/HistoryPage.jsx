@@ -9,7 +9,6 @@ const HistoryPage = () => {
       <div className="scanner-container">
         <div className="scanner-header">
           <h1>Historial de Escaneos</h1>
-          <p className="subtitle">Registro de análisis anteriores</p>
         </div>
         <div style={{ padding: '2rem', background: 'white', borderRadius: '15px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
           <h2>Página en desarrollo</h2>
@@ -18,6 +17,7 @@ const HistoryPage = () => {
             <h3>Próximamente:</h3>
             <ul style={{ marginLeft: '1.5rem', marginTop: '1rem' }}>
               <li>Lista de escaneos anteriores</li>
+              
               <li>Filtros por fecha y resultado</li>
               <li>Comparación de resultados</li>
               <li>Exportación de reportes</li>
